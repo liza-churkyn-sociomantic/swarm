@@ -235,7 +235,7 @@ public final class Connection: ConnectionBase
 
     public this ( Const!(Credentials) credentials, IRequestSet request_set,
                   EpollSelectDispatcher epoll,
-                  Notifier connection_error_notifier )
+                  scope Notifier connection_error_notifier )
     {
         this.client_socket = new ClientSocket;
 
@@ -269,7 +269,7 @@ public final class Connection: ConnectionBase
 
     ***************************************************************************/
 
-    public Status start ( AddrPort node_address, Notifier startup_notifier )
+    public Status start ( AddrPort node_address, scope Notifier startup_notifier )
     {
         debug ( SwarmConn )
         {
@@ -645,7 +645,7 @@ public final class Connection: ConnectionBase
     ***************************************************************************/
 
     override protected void getPayloadForSending (
-        RequestId id, void delegate ( in void[][] payload ) send
+        RequestId id, scope void delegate ( in void[][] payload ) send
     )
     {
         if (auto request_handler = this.getRequestOnConn(id))
